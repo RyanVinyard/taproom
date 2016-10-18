@@ -18,6 +18,9 @@ import { Keg } from './keg.model';
     <new-keg
       (newKegSender)="addKeg($event)"
     ></new-keg>
+    <low-keg
+      [childLowKeg]='lowKeg'
+    ></low-keg>
   </div>
   `
 })
@@ -41,8 +44,16 @@ export class AppComponent {
   addKeg(newKegFromChild: Keg) {
     this.masterKegList.push(newKegFromChild);
   }
-
+  //rebuild using pipes
+  lowKeg: Keg[] = [];
   pourPint(keg) {
-    keg.pints = keg.pints -1;
+    if (keg.pints > 0) {
+    keg.pints = keg.pints - 1;
+    } else {
+    alert("Tap empty")
+    }
+    if (keg.pints === 10) {
+      this.lowKeg.push(keg);
+      }
+    }
   }
-}
