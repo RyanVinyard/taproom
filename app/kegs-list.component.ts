@@ -9,6 +9,8 @@ import { Keg } from './keg.model';
       <h3>{{ currentKeg.brand }}</h3>
       <h3>{{ currentKeg.alcohol }}</h3>
       <h3>{{ currentKeg.price }}</h3>
+      <h3>{{ currentKeg.pints }}</h3>
+      <button (click)="pourPint(currentKeg)">Pour</button>
       <button (click)="editButtonHasBeenClicked(currentKeg)">Edit</button>
     </div>
         `
@@ -19,5 +21,9 @@ export class KegsListComponent {
   @Output() clickSender = new EventEmitter();
   editButtonHasBeenClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
+  }
+  @Output() clickSenderPour = new EventEmitter();
+  pourPint(kegToPour: Keg) {
+    this.clickSenderPour.emit(kegToPour);
   }
 }
