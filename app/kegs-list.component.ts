@@ -4,7 +4,11 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'keg-list',
   template: `
-    <div *ngFor="let currentKeg of childKegList">
+  <select (change)="onChange($event.target.value)">
+    <option value="low">Show low kegs</option>
+    <option value="notLow">Show not low kegs</option>
+  </select>
+    <div *ngFor="let currentKeg of childKegList | pints:pintsLeft">
       <h3>{{ currentKeg.name }}</h3>
       <h3>{{ currentKeg.brand }}</h3>
       <h3>{{ currentKeg.alcohol }}</h3>
@@ -13,7 +17,7 @@ import { Keg } from './keg.model';
       <button (click)="pourPint(currentKeg)">Pour</button>
       <button (click)="editButtonHasBeenClicked(currentKeg)">Edit</button>
     </div>
-        `
+      `
 })
 
 export class KegsListComponent {
@@ -25,5 +29,11 @@ export class KegsListComponent {
   @Output() clickSenderPour = new EventEmitter();
   pourPint(kegToPour: Keg) {
     this.clickSenderPour.emit(kegToPour);
+  }
+  public pintsLeft: string = "low";
+
+  onChange(optionFromMenu) {
+    this.pintsLeft = optionFromMenu;
+    console.log(this.pintsLeft);
   }
 }

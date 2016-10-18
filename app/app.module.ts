@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { EditKegComponent } from './edit-keg.component';
 import { NewKegComponent } from './new-keg.component';
 import { LowKegsComponent } from './low-keg.component';
+import { PintsPipe } from './pints.pipe';
 
 
 
@@ -20,6 +21,7 @@ import { LowKegsComponent } from './low-keg.component';
     EditKegComponent,
     NewKegComponent,
     LowKegsComponent,
+    PintsPipe,
   ],
   bootstrap:     [ AppComponent ],
 })
